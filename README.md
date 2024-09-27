@@ -8,8 +8,9 @@ are executed first, thus enabling faster feedback for failed tests to developers
 **This is a WIP**
 -----------------
 
-DATASET: https://github.com/staiyeba/atcs-dataset
-DATASET Format notes: https://github.com/staiyeba/retecs-forked/tree/master
+- DATASET: https://github.com/staiyeba/atcs-dataset
+- DATASET Format notes: https://github.com/staiyeba/retecs-forked/tree/master
+- Old Dataset format: https://github.com/staiyeba/test-pipeline-optimizing-algorithm/blob/master/datasets/case_1/10000_3.csv
 
 ##The Algorithm
 
@@ -22,19 +23,15 @@ DATASET Format notes: https://github.com/staiyeba/retecs-forked/tree/master
         delta_new = 0
         if tx != ty:
              if tx.pos < ty.pos:
-                if tx.pos < pre_test_max_pos(ty) and \
-                ty.pos > subsequent_test_min_pos(tx):
+                if tx.pos < pre_test_max_pos(ty) and ty.pos > subsequent_test_min_pos(tx):
                     if tx.fail_prob < ty.fail_prob:
-                        delta_new = (ty.fail_prob − tx.fail_prob) \
-                        ∗ (ty.pos − tx.pos)
+                        delta_new = (ty.fail_prob − tx.fail_prob) ∗ (ty.pos − tx.pos)
                         if delta_max < delta_new:
                             delta_max = delta_new
             else:
-                if ty.pos < pre_test_max_pos(tx) and \
-                tx.pos > subsequent_test_min_pos(ty):
+                if ty.pos < pre_test_max_pos(tx) and tx.pos > subsequent_test_min_pos(ty):
                     if ty.fail_prob < tx.fail_prob:
-                        delta_new = (tx.fail_prob − ty.fail_prob) \
-                        ∗ (tx.pos − ty.pos)
+                        delta_new = (tx.fail_prob − ty.fail_prob) ∗ (tx.pos − ty.pos)
                         if delta_max < delta_new:
                             delta_max = delta_new
     if delta_max > 0:
